@@ -22,7 +22,7 @@ export default {
 
         // 設定→メンションされたとき
         if (body.type === 'mention') {
-            const noteUserHost = body.body.note.user.host ? body.body.note.user.host : env.HOST;
+            const noteUserHost = body.body.note.user.host ?? env.HOST;
 
             const ok = await fetch(env.DISCORD, {
                 body: JSON.stringify({
@@ -57,7 +57,7 @@ export default {
 
         // 設定→フォローされたとき
         if (body.type === 'followed') {
-            const userHost = body.body.user.host ? body.body.user.host : env.HOST;
+            const userHost = body.body.user.host ?? env.HOST;
             const userIsbot = body.body.user.isBot ? 'はい' : 'いいえ';
 
             const ok = await fetch(env.DISCORD, {
@@ -93,7 +93,7 @@ export default {
 
         // 設定→Renoteされたとき
         if (body.type === 'renote') {
-            const noteUserHost = body.body.note.user.host ? body.body.note.user.host : env.HOST;
+            const noteUserHost = body.body.note.user.host ?? env.HOST;
 
             const ok = await fetch(env.DISCORD, {
                 body: JSON.stringify({
@@ -158,8 +158,8 @@ export default {
 
         // コントロールパネル→ユーザーから通報があったとき
         if (body.type === 'abuseReport') {
-            const targetUserHost = body.body.targetUser.host ? body.body.targetUser.host : env.HOST;
-            const reporterHost = body.body.reporter.host ? body.body.reporter.host : env.HOST;
+            const targetUserHost = body.body.targetUser.host ?? env.HOST;
+            const reporterHost = body.body.reporter.host ?? env.HOST;
 
             const ok = await fetch(env.DISCORD, {
                 body: JSON.stringify({
@@ -197,9 +197,9 @@ export default {
 
         // コントロールパネル→ユーザーからの通報を処理したとき
         if (body.type === 'abuseReportResolved') {
-            const targetUserHost = body.body.targetUser.host ? body.body.targetUser.host : env.HOST;
-            const reporterHost = body.body.reporter.host ? body.body.reporter.host : env.HOST;
-            const assigneeHost = body.body.assignee.host ? body.body.assignee.host : env.HOST;
+            const targetUserHost = body.body.targetUser.host ?? env.HOST;
+            const reporterHost = body.body.reporter.host ?? env.HOST;
+            const assigneeHost = body.body.assignee.host ?? env.HOST;
             const resolved = body.body.resolved ? 'はい' : 'いいえ';
             const forwarded = body.body.forwarded ? 'はい' : 'いいえ';
 
